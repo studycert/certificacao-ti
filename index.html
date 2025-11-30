@@ -580,6 +580,167 @@
             font-size: 0.9rem;
         }
 
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+            border-radius: 0 0 8px 8px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* Upload Form */
+        .upload-form {
+            display: none;
+        }
+
+        .upload-form.active {
+            display: block;
+        }
+
+        .file-input-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .file-input {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 1rem;
+            border: 2px dashed var(--gray);
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-input-label:hover {
+            border-color: var(--secondary);
+            background: #f8fafc;
+        }
+
+        .file-name {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* User Info */
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info.active {
+            display: flex;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user-name {
+            color: white;
+            font-weight: 500;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header-content {
@@ -604,6 +765,10 @@
             .hero p {
                 font-size: 1rem;
             }
+
+            .modal-content {
+                width: 95%;
+            }
         }
     </style>
 </head>
@@ -625,9 +790,14 @@
                         <li><a href="#" class="nav-link" data-target="simulados">Simulados</a></li>
                     </ul>
                 </nav>
-                <div class="auth-buttons">
-                    <a href="#" class="btn btn-outline">Entrar</a>
-                    <a href="#" class="btn btn-primary">Cadastrar</a>
+                <div class="auth-buttons" id="auth-buttons">
+                    <a href="#" class="btn btn-outline" id="login-btn">Entrar</a>
+                    <a href="#" class="btn btn-primary" id="register-btn">Cadastrar</a>
+                </div>
+                <div class="user-info" id="user-info">
+                    <div class="user-avatar" id="user-avatar">U</div>
+                    <div class="user-name" id="user-name">Usuário</div>
+                    <a href="#" class="btn btn-outline" id="logout-btn">Sair</a>
                 </div>
             </div>
         </div>
@@ -934,7 +1104,7 @@
                 </div>
             </div>
 
-            <a href="#" class="btn btn-primary new-post-btn">Nova Discussão</a>
+            <a href="#" class="btn btn-primary new-post-btn" id="new-post-btn">Nova Discussão</a>
         </div>
     </section>
 
@@ -1070,98 +1240,98 @@
                 <p>Teste seus conhecimentos e acompanhe seu progresso</p>
             </div>
 
-            <div class="upload-area">
+            <div class="upload-area" id="upload-area">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <h3>Compartilhe Seu Simulado</h3>
                 <p>Faça upload de simulados HTML para compartilhar com a comunidade</p>
-                <a href="#" class="btn btn-primary">Upload de Arquivo</a>
+                <a href="#" class="btn btn-primary" id="upload-btn">Upload de Arquivo</a>
             </div>
 
             <div class="simulados-container">
-    <!-- ITIL 4 Foundation - COM BOTÃO PARA MOSTRAR SIMULADOS -->
-    <div class="simulado-card">
-        <div class="card-header">
-            <h3><i class="fas fa-file-alt"></i> ITIL 4 Foundation</h3>
-        </div>
-        <div class="card-body">
-            <span class="simulado-badge">11 Simulados Disponíveis</span>
-            <p>Pacote completo de simulados para certificação ITIL 4 Foundation.</p>
-            
-            <!-- Botão para mostrar simulados -->
-            <div style="text-align: center; margin: 15px 0;">
-                <button class="btn btn-outline" onclick="toggleSimulados('itil4')" id="btn-itil4" style="width: 100%;">
-                    📋 Ver Todos os 11 Simulados
-                </button>
-            </div>
-            
-            <!-- Lista dos Simulados ITIL 4 (inicialmente oculta) -->
-            <div class="simulados-lista" id="lista-itil4" style="display: none; margin-top: 15px; max-height: 300px; overflow-y: auto;">
-                <!-- SIMULADO 1 - DISPONÍVEL -->
-                <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee;">
-                    <span>✅ Simulado 1 - Conceitos Básicos</span>
-                    <a href="simulado-itil4-01.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.8em;">Iniciar</a>
+                <!-- ITIL 4 Foundation - COM BOTÃO PARA MOSTRAR SIMULADOS -->
+                <div class="simulado-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-file-alt"></i> ITIL 4 Foundation</h3>
+                    </div>
+                    <div class="card-body">
+                        <span class="simulado-badge">11 Simulados Disponíveis</span>
+                        <p>Pacote completo de simulados para certificação ITIL 4 Foundation.</p>
+                        
+                        <!-- Botão para mostrar simulados -->
+                        <div style="text-align: center; margin: 15px 0;">
+                            <button class="btn btn-outline" onclick="toggleSimulados('itil4')" id="btn-itil4" style="width: 100%;">
+                                📋 Ver Todos os 11 Simulados
+                            </button>
+                        </div>
+                        
+                        <!-- Lista dos Simulados ITIL 4 (inicialmente oculta) -->
+                        <div class="simulados-lista" id="lista-itil4" style="display: none; margin-top: 15px; max-height: 300px; overflow-y: auto;">
+                            <!-- SIMULADO 1 - DISPONÍVEL -->
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee;">
+                                <span>✅ Simulado 1 - Conceitos Básicos</span>
+                                <a href="simulado-itil4-01.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.8em;">Iniciar</a>
+                            </div>
+                            
+                            <!-- SIMULADO 2 - DISPONÍVEL -->
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee;">
+                                <span>✅ Simulado 2 - Dimensões do Serviço</span>
+                                <a href="simulado-itil4-02.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.8em;">Iniciar</a>
+                            </div>
+                            
+                            <!-- SIMULADO 3 - DISPONÍVEL -->
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee;">
+                                <span>✅ Simulado 3 - Cadeia de Valor</span>
+                                <a href="simulado-itil4-03.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.8em;">Iniciar</a>
+                            </div>
+                            
+                           <!-- SIMULADO 4 - DISPONÍVEL -->
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>✅ Simulado 4 - Práticas Gerais</span>
+                                <a href="simulado-itil4-04.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.8em;">Iniciar</a>
+                            </div>
+                            
+                             <!-- SIMULADO 5-11 - EM BREVE -->
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>⏳ Simulado 5 - Gerenciamento de Serviço</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
+                            </div>
+                            
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>⏳ Simulado 6 - Princípios Orientadores</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
+                            </div>
+                            
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>⏳ Simulado 7 - Melhoria Contínua</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
+                            </div>
+                            
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>⏳ Simulado 8 - Governança</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
+                            </div>
+                            
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>⏳ Simulado 9 - Modelos de Mudança</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
+                            </div>
+                            
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>⏳ Simulado 10 - Práticas Técnicas</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
+                            </div>
+                            
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; opacity: 0.6;">
+                                <span>⏳ Simulado 11 - Final Completo</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <small><strong>Progresso:</strong> 3 de 11 disponíveis • 120 questões</small>
+                    </div>
                 </div>
-                
-                <!-- SIMULADO 2 - DISPONÍVEL -->
-                <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee;">
-                    <span>✅ Simulado 2 - Dimensões do Serviço</span>
-                    <a href="simulado-itil4-02.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.8em;">Iniciar</a>
-                </div>
-                
-                <!-- SIMULADO 3 - DISPONÍVEL -->
-                <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee;">
-                    <span>✅ Simulado 3 - Cadeia de Valor</span>
-                    <a href="simulado-itil4-03.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.8em;">Iniciar</a>
-                </div>
-                
-               <!-- SIMULADO 4 - DISPONÍVEL -->
-                <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
-                    <span>✅ Simulado 4 - Práticas Gerais</span>
-                    <a href="simulado-itil4-04.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.8em;">Iniciar</a>
-                </div>
-                
-                 <!-- SIMULADO 5-11 - EM BREVE -->
-                <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
-                    <span>⏳ Simulado 5 - Gerenciamento de Serviço</span>
-                    <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
-                </div>
-                
-                <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
-                    <span>⏳ Simulado 6 - Princípios Orientadores</span>
-                    <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
-                </div>
-                
-                <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
-                    <span>⏳ Simulado 7 - Melhoria Contínua</span>
-                    <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
-                </div>
-                
-                <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
-                    <span>⏳ Simulado 8 - Governança</span>
-                    <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
-                </div>
-                
-                <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
-                    <span>⏳ Simulado 9 - Modelos de Mudança</span>
-                    <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
-                </div>
-                
-                <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
-                    <span>⏳ Simulado 10 - Práticas Técnicas</span>
-                    <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
-                </div>
-                
-                <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; opacity: 0.6;">
-                    <span>⏳ Simulado 11 - Final Completo</span>
-                    <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer">
-            <small><strong>Progresso:</strong> 3 de 11 disponíveis • 120 questões</small>
-        </div>
-    </div>
-                                   
+                                           
                 <div class="simulado-card">
                     <div class="card-header">
                         <h3><i class="fas fa-server"></i> LPIC-1</h3>
@@ -1212,13 +1382,12 @@
                         <p>Compartilhe seu próprio simulado com a comunidade.</p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-outline">Upload</a>
+                        <a href="#" class="btn btn-outline" id="add-simulado-btn">Upload</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-            
 
     <!-- Footer -->
     <footer>
@@ -1273,6 +1442,115 @@
         </div>
     </footer>
 
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Entrar na StudyCert</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">E-mail</label>
+                        <input type="email" id="login-email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Senha</label>
+                        <input type="password" id="login-password" class="form-control" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="close-login">Cancelar</button>
+                <button class="btn btn-primary" id="submit-login">Entrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Criar Conta na StudyCert</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="register-name">Nome Completo</label>
+                        <input type="text" id="register-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">E-mail</label>
+                        <input type="email" id="register-email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Senha</label>
+                        <input type="password" id="register-password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm">Confirmar Senha</label>
+                        <input type="password" id="register-confirm" class="form-control" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="close-register">Cancelar</button>
+                <button class="btn btn-primary" id="submit-register">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div class="modal" id="upload-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Upload de Simulado</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="upload-form">
+                    <div class="form-group">
+                        <label for="simulado-title">Título do Simulado</label>
+                        <input type="text" id="simulado-title" class="form-control" placeholder="Ex: ITIL 4 Foundation - Simulado 1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="simulado-cert">Certificação</label>
+                        <select id="simulado-cert" class="form-control" required>
+                            <option value="">Selecione uma certificação</option>
+                            <option value="ITIL 4">ITIL 4</option>
+                            <option value="LPIC-1">LPIC-1</option>
+                            <option value="Security+">Security+</option>
+                            <option value="AWS">AWS</option>
+                            <option value="Azure">Azure</option>
+                            <option value="Outra">Outra</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="simulado-desc">Descrição</label>
+                        <textarea id="simulado-desc" class="form-control" rows="3" placeholder="Descreva o conteúdo do simulado..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Arquivo HTML</label>
+                        <div class="file-input-container">
+                            <input type="file" id="simulado-file" class="file-input" accept=".html,.htm">
+                            <label for="simulado-file" class="file-input-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Clique para selecionar um arquivo HTML</p>
+                            </label>
+                            <div class="file-name" id="file-name">Nenhum arquivo selecionado</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="close-upload">Cancelar</button>
+                <button class="btn btn-primary" id="submit-upload">Enviar Simulado</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Navigation between sections
         document.addEventListener('DOMContentLoaded', function() {
@@ -1302,31 +1580,172 @@
                 });
             });
             
-            // Simulate file upload for simulados
-            const uploadBtn = document.querySelector('.upload-area .btn');
-            if (uploadBtn) {
-                uploadBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert('Funcionalidade de upload será implementada em breve!');
+            // Modal functionality
+            const modals = document.querySelectorAll('.modal');
+            const closeButtons = document.querySelectorAll('.close-modal, .btn-outline[id^="close-"]');
+            
+            // Open modals
+            document.getElementById('login-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('login-modal').classList.add('active');
+            });
+            
+            document.getElementById('register-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('register-modal').classList.add('active');
+            });
+            
+            document.getElementById('upload-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (checkLogin()) {
+                    document.getElementById('upload-modal').classList.add('active');
+                }
+            });
+            
+            document.getElementById('add-simulado-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (checkLogin()) {
+                    document.getElementById('upload-modal').classList.add('active');
+                }
+            });
+            
+            document.getElementById('new-post-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (checkLogin()) {
+                    alert('Funcionalidade de criar nova discussão será implementada em breve!');
+                }
+            });
+            
+            // Close modals
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    modals.forEach(modal => modal.classList.remove('active'));
                 });
+            });
+            
+            // Close modal when clicking outside
+            modals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            });
+            
+            // File input display
+            document.getElementById('simulado-file').addEventListener('change', function(e) {
+                const fileName = this.files[0] ? this.files[0].name : 'Nenhum arquivo selecionado';
+                document.getElementById('file-name').textContent = fileName;
+            });
+            
+            // Form submissions
+            document.getElementById('submit-login').addEventListener('click', function() {
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                if (email && password) {
+                    // Simulate login
+                    loginUser(email.split('@')[0]);
+                    document.getElementById('login-modal').classList.remove('active');
+                    document.getElementById('login-form').reset();
+                } else {
+                    alert('Por favor, preencha todos os campos!');
+                }
+            });
+            
+            document.getElementById('submit-register').addEventListener('click', function() {
+                const name = document.getElementById('register-name').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const confirm = document.getElementById('register-confirm').value;
+                
+                if (name && email && password && confirm) {
+                    if (password === confirm) {
+                        // Simulate registration
+                        loginUser(name);
+                        document.getElementById('register-modal').classList.remove('active');
+                        document.getElementById('register-form').reset();
+                    } else {
+                        alert('As senhas não coincidem!');
+                    }
+                } else {
+                    alert('Por favor, preencha todos os campos!');
+                }
+            });
+            
+            document.getElementById('submit-upload').addEventListener('click', function() {
+                const title = document.getElementById('simulado-title').value;
+                const cert = document.getElementById('simulado-cert').value;
+                const file = document.getElementById('simulado-file').files[0];
+                
+                if (title && cert && file) {
+                    if (file.type === 'text/html' || file.name.endsWith('.html') || file.name.endsWith('.htm')) {
+                        // Simulate upload
+                        alert(`Simulado "${title}" enviado com sucesso!`);
+                        document.getElementById('upload-modal').classList.remove('active');
+                        document.getElementById('upload-form').reset();
+                        document.getElementById('file-name').textContent = 'Nenhum arquivo selecionado';
+                    } else {
+                        alert('Por favor, selecione um arquivo HTML válido!');
+                    }
+                } else {
+                    alert('Por favor, preencha todos os campos!');
+                }
+            });
+            
+            // Logout
+            document.getElementById('logout-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                logoutUser();
+            });
+            
+            // Check if user is logged in
+            function checkLogin() {
+                const userInfo = document.getElementById('user-info');
+                if (!userInfo.classList.contains('active')) {
+                    alert('Por favor, faça login para acessar esta funcionalidade!');
+                    document.getElementById('login-modal').classList.add('active');
+                    return false;
+                }
+                return true;
+            }
+            
+            // Login function
+            function loginUser(name) {
+                document.getElementById('auth-buttons').style.display = 'none';
+                document.getElementById('user-info').classList.add('active');
+                document.getElementById('user-name').textContent = name;
+                document.getElementById('user-avatar').textContent = name.charAt(0).toUpperCase();
+                
+                // Show upload area
+                document.getElementById('upload-area').style.display = 'block';
+            }
+            
+            // Logout function
+            function logoutUser() {
+                document.getElementById('auth-buttons').style.display = 'flex';
+                document.getElementById('user-info').classList.remove('active');
+                
+                // Hide upload area
+                document.getElementById('upload-area').style.display = 'none';
             }
         });
     </script>
     <script>
-function toggleSimulados(tipo) {
-    const lista = document.getElementById(`lista-${tipo}`);
-    const botao = document.getElementById(`btn-${tipo}`);
-    
-    if (lista.style.display === 'none') {
-        lista.style.display = 'block';
-        botao.innerHTML = '📁 Ocultar Simulados';
-        botao.classList.add('btn-primary');
-    } else {
-        lista.style.display = 'none';
-        botao.innerHTML = '📋 Ver Todos os 11 Simulados';
-        botao.classList.remove('btn-primary');
-    }
-}
-</script>
+        function toggleSimulados(tipo) {
+            const lista = document.getElementById(`lista-${tipo}`);
+            const botao = document.getElementById(`btn-${tipo}`);
+            
+            if (lista.style.display === 'none') {
+                lista.style.display = 'block';
+                botao.innerHTML = '📁 Ocultar Simulados';
+                botao.classList.add('btn-primary');
+            } else {
+                lista.style.display = 'none';
+                botao.innerHTML = '📋 Ver Todos os 11 Simulados';
+                botao.classList.remove('btn-primary');
+            }
+        }
+    </script>
 </body>
 </html>
