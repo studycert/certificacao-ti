@@ -22,8 +22,6 @@
             --light: #ecf0f1;
             --dark: #2c3e50;
             --gray: #95a5a6;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
@@ -44,7 +42,7 @@
             background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
             color: white;
             padding: 1rem 0;
-            box-shadow: var(--shadow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -60,12 +58,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .logo:hover {
-            transform: translateY(-2px);
         }
 
         .logo i {
@@ -85,200 +77,87 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1rem;
+            gap: 2rem;
         }
 
         nav a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: var(--transition);
+            transition: color 0.3s;
             padding: 0.5rem 1rem;
-            border-radius: 8px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        nav a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        nav a:hover::before {
-            left: 100%;
+            border-radius: 4px;
         }
 
         nav a:hover, nav a.active {
             background-color: rgba(255,255,255,0.1);
             color: var(--secondary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Efeito de transparência React apenas nos botões da barra superior */
+        .auth-buttons .btn {
+            transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .auth-buttons .btn:hover {
+            opacity: 0.7;
             transform: translateY(-2px);
         }
 
-        /* BOTÕES COM EFEITO REACT ORGANIZADOS */
         .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s;
             border: none;
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            position: relative;
-            overflow: hidden;
-            font-size: 0.9rem;
+            display: inline-block;
             text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Efeito de transparência no hover */
-        .btn:hover {
-            opacity: 0.9;
-            backdrop-filter: blur(15px);
         }
 
         .btn-outline {
             background: transparent;
             border: 2px solid white;
             color: white;
-            backdrop-filter: blur(5px);
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: white;
         }
 
         .btn-outline:hover {
             background: white;
             color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(255,255,255,0.2);
-            opacity: 0.95;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--secondary) 0%, #2980b9 100%);
-            color: white;
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(5px);
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, #2980b9 0%, var(--secondary) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(52, 152, 219, 0.4);
-            opacity: 0.9;
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--success) 0%, #219653 100%);
-            color: white;
-            box-shadow: var(--shadow);
+            background: #2980b9;
         }
 
         .btn-success:hover {
-            background: linear-gradient(135deg, #219653 0%, var(--success) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(39, 174, 96, 0.4);
-            opacity: 0.9;
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, var(--warning) 0%, #e67e22 100%);
-            color: white;
-            box-shadow: var(--shadow);
+            background: #219653;
         }
 
         .btn-warning:hover {
-            background: linear-gradient(135deg, #e67e22 0%, var(--warning) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(243, 156, 18, 0.4);
-            opacity: 0.9;
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, var(--gray) 0%, #7f8c8d 100%);
-            color: white;
-            box-shadow: var(--shadow);
-        }
-
-        .btn-secondary:hover {
-            background: linear-gradient(135deg, #7f8c8d 0%, var(--gray) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(149, 165, 166, 0.4);
-            opacity: 0.9;
-        }
-
-        .btn:disabled {
-            background: var(--gray);
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
-            opacity: 0.6;
-        }
-
-        .btn-sm {
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-        }
-
-        .btn-lg {
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-        }
-
-        /* GRUPOS DE BOTÕES ORGANIZADOS */
-        .btn-group {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn-group-vertical {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            width: 100%;
-        }
-
-        .btn-group .btn {
-            flex: 1;
-            min-width: 140px;
-        }
-
-        .btn-group-vertical .btn {
-            width: 100%;
-        }
-
-        /* Auth Buttons Container */
-        .auth-buttons {
-            display: flex;
-            gap: 1rem;
+            background: #e67e22;
         }
 
         /* Hero Section */
@@ -294,29 +173,12 @@
         .hero h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            animation: fadeInUp 0.8s ease-out;
         }
 
         .hero p {
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 2rem;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        .hero .btn-group {
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         /* Main Content */
@@ -324,16 +186,10 @@
             display: none;
             padding: 3rem 0;
             min-height: 60vh;
-            animation: fadeIn 0.5s ease-out;
         }
 
         .main-content.active {
             display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .section-title {
@@ -363,21 +219,20 @@
 
         .card {
             background: white;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .card-header {
             padding: 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            background: var(--primary);
             color: white;
         }
 
@@ -391,112 +246,276 @@
             border-top: 1px solid #eee;
         }
 
-        /* Simulados - ESTILO MELHORADO */
+        /* Forum */
+        .forum-container {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+        }
+
+        .forum-categories {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .forum-categories h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .category-list li:last-child {
+            border-bottom: none;
+        }
+
+        .category-list a {
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-list a:hover {
+            color: var(--secondary);
+        }
+
+        .category-count {
+            background: var(--secondary);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .forum-posts {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .post {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post:last-child {
+            border-bottom: none;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .post-title:hover {
+            color: var(--secondary);
+        }
+
+        .post-meta {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .post-excerpt {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .post-footer {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .new-post-btn {
+            display: block;
+            margin: 2rem auto;
+            width: 200px;
+        }
+
+        /* Study Materials */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .material-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .material-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .material-icon {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .material-content {
+            padding: 1.5rem;
+        }
+
+        .material-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .material-content p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Simulados */
         .simulados-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
         }
 
         .simulado-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid rgba(0,0,0,0.05);
-            display: block !important;
-            visibility: visible !important;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
 
         .simulado-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
         }
 
         .simulado-badge {
-            background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
+            background: var(--accent);
             color: white;
             padding: 0.5rem 1rem;
             display: inline-block;
             font-size: 0.8rem;
             font-weight: 600;
-            border-radius: 20px;
+            border-radius: 4px;
             margin-bottom: 1rem;
-            box-shadow: var(--shadow);
-        }
-
-        /* Lista de Simulados Melhorada */
-        .simulados-lista {
-            margin-top: 1rem;
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 1rem;
-            background: #f8f9fa;
-            transition: var(--transition);
-        }
-
-        .simulado-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            border-bottom: 1px solid #dee2e6;
-            transition: var(--transition);
-            border-radius: 6px;
-            margin-bottom: 0.5rem;
-            background: white;
-        }
-
-        .simulado-item:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
-        }
-
-        .simulado-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
         }
 
         .upload-area {
             background: white;
             border: 2px dashed var(--gray);
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 3rem 2rem;
             text-align: center;
             margin-bottom: 2rem;
-            transition: var(--transition);
-            backdrop-filter: blur(5px);
+            transition: all 0.3s;
         }
 
         .upload-area:hover {
             border-color: var(--secondary);
             background: #f8fafc;
-            transform: translateY(-2px);
         }
 
         .upload-area i {
             font-size: 3rem;
             color: var(--gray);
             margin-bottom: 1rem;
-            transition: var(--transition);
         }
 
-        .upload-area:hover i {
-            color: var(--secondary);
-            transform: scale(1.1);
+        .upload-area h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Certifications Grid */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cert-icon {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 2.5rem;
+        }
+
+        .cert-content {
+            padding: 1.5rem;
+        }
+
+        .cert-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .cert-content p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-level {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            background: var(--primary);
             color: white;
             padding: 3rem 0 1.5rem;
-            display: block !important;
-            visibility: visible !important;
         }
 
         .footer-content {
@@ -504,6 +523,72 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
         }
 
         /* Responsive */
@@ -516,18 +601,10 @@
             nav ul {
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 0.5rem;
+                gap: 1rem;
             }
 
-            .btn-group {
-                flex-direction: column;
-            }
-
-            .btn-group .btn {
-                min-width: 100%;
-            }
-
-            .simulados-container {
+            .forum-container {
                 grid-template-columns: 1fr;
             }
 
@@ -538,34 +615,6 @@
             .hero p {
                 font-size: 1rem;
             }
-        }
-
-        /* Loading States para efeito React */
-        .btn.loading {
-            position: relative;
-            color: transparent;
-        }
-
-        .btn.loading::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 2px solid transparent;
-            border-top: 2px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Efeito de foco para acessibilidade */
-        .btn:focus {
-            outline: 2px solid var(--secondary);
-            outline-offset: 2px;
         }
     </style>
 </head>
@@ -588,12 +637,8 @@
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="#" class="btn btn-outline">
-                        <i class="fas fa-sign-in-alt"></i>Entrar
-                    </a>
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-user-plus"></i>Cadastrar
-                    </a>
+                    <a href="#" class="btn btn-outline">Entrar</a>
+                    <a href="#" class="btn btn-primary">Cadastrar</a>
                 </div>
             </div>
         </div>
@@ -604,14 +649,7 @@
         <div class="container">
             <h2>Prepare-se para suas Certificações de TI</h2>
             <p>Encontre materiais de estudo, participe de discussões no fórum e teste seus conhecimentos com nossos simulados.</p>
-            <div class="btn-group">
-                <a href="#" class="btn btn-primary btn-lg">
-                    <i class="fas fa-rocket"></i>Começar Agora
-                </a>
-                <a href="#" class="btn btn-outline btn-lg" data-target="certificacoes">
-                    <i class="fas fa-search"></i>Ver Certificações
-                </a>
-            </div>
+            <a href="#" class="btn btn-primary">Começar Agora</a>
         </div>
     </section>
 
@@ -632,11 +670,7 @@
                         <p>Participe de discussões, tire dúvidas e compartilhe conhecimento com outros profissionais de TI.</p>
                     </div>
                     <div class="card-footer">
-                        <div class="btn-group-vertical">
-                            <a href="#" class="btn btn-primary" data-target="forum">
-                                <i class="fas fa-comments"></i>Acessar Fórum
-                            </a>
-                        </div>
+                        <a href="#" class="btn btn-primary" data-target="forum">Acessar Fórum</a>
                     </div>
                 </div>
 
@@ -648,11 +682,7 @@
                         <p>Acesse guias, resumos, videoaulas e outros recursos para sua preparação.</p>
                     </div>
                     <div class="card-footer">
-                        <div class="btn-group-vertical">
-                            <a href="#" class="btn btn-primary" data-target="materiais">
-                                <i class="fas fa-book-open"></i>Ver Materiais
-                            </a>
-                        </div>
+                        <a href="#" class="btn btn-primary" data-target="materiais">Ver Materiais</a>
                     </div>
                 </div>
 
@@ -664,18 +694,386 @@
                         <p>Teste seus conhecimentos com nossos simulados e acompanhe seu progresso.</p>
                     </div>
                     <div class="card-footer">
-                        <div class="btn-group-vertical">
-                            <a href="#" class="btn btn-primary" data-target="simulados">
-                                <i class="fas fa-play"></i>Ver Simulados
-                            </a>
-                        </div>
+                        <a href="#" class="btn btn-primary" data-target="simulados">Ver Simulados</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <h2>Certificações em Destaque</h2>
+                <p>As certificações mais relevantes do mercado de TI</p>
+            </div>
+
+            <div class="certifications-grid">
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <div class="cert-content">
+                        <span class="cert-level">Cloud</span>
+                        <h3>Azure Fundamentals</h3>
+                        <p>AZ-900: Conceitos fundamentais de nuvem e serviços Azure.</p>
+                        <a href="#" class="btn btn-primary">Estudar</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <div class="cert-content">
+                        <span class="cert-level">Cloud</span>
+                        <h3>AWS Cloud Practitioner</h3>
+                        <p>Fundamentos da AWS e conceitos de computação em nuvem.</p>
+                        <a href="#" class="btn btn-primary">Estudar</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="cert-content">
+                        <span class="cert-level">Segurança</span>
+                        <h3>Security+</h3>
+                        <p>CompTIA Security+: Fundamentos de cybersecurity.</p>
+                        <a href="#" class="btn btn-primary">Estudar</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="cert-content">
+                        <span class="cert-level">Governança</span>
+                        <h3>ITIL 4 Foundation</h3>
+                        <p>Framework de gerenciamento de serviços de TI.</p>
+                        <a href="#" class="btn btn-primary">Estudar</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Simulados Content - ORGANIZADO E COM EFEITOS REACT -->
+    <!-- Certificações Content -->
+    <section id="certificacoes" class="main-content">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossas Certificações</h2>
+                <p>Prepare-se para as certificações mais demandadas do mercado</p>
+            </div>
+
+            <div class="certifications-grid">
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <div class="cert-content">
+                        <span class="cert-level">Cloud</span>
+                        <h3>Azure Administrator</h3>
+                        <p>AZ-104: Implementação, gerenciamento e monitoramento de ambientes Azure.</p>
+                        <a href="#" class="btn btn-primary">Estudar</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <div class="cert-content">
+                        <span class="cert-level">Cloud</span>
+                        <h3>AWS Solutions Architect</h3>
+                        <p>SAA-C03: Projeto e implantação de sistemas escaláveis na AWS.</p>
+                        <a href="#" class="btn btn-primary">Estudar</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="cert-content">
+                        <span class="cert-level">Segurança</span>
+                        <h3>Cybersecurity Analyst</h3>
+                        <p>CySA+: Análise de ameaças e resposta a incidentes de segurança.</p>
+                        <a href="#" class="btn btn-primary">Estudar</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="cert-content">
+                        <span class="cert-level">Governança</span>
+                        <h3>ITIL 4 Specialist</h3>
+                        <p>Práticas avançadas de gerenciamento de serviços de TI.</p>
+                        <a href="#" class="btn btn-primary">Estudar</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="cert-content">
+                        <span class="cert-level">Linux</span>
+                        <h3>LPIC-1</h3>
+                        <p>Certificação Linux Professional Institute - Nível 1.</p>
+                        <a href="#" class="btn btn-primary">Estudar</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="cert-content">
+                        <span class="cert-level">Linux</span>
+                        <h3>LPIC-2</h3>
+                        <p>Certificação Linux Professional Institute - Nível Avançado.</p>
+                        <a href="#" class="btn btn-primary">Estudar</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="cert-content">
+                        <span class="cert-level">Rede</span>
+                        <h3>CCNA</h3>
+                        <p>Cisco Certified Network Associate: Fundamentos de redes.</p>
+                        <a href="#" class="btn btn-primary">Estudar</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="cert-content">
+                        <span class="cert-level">Dados</span>
+                        <h3>Data Fundamentals</h3>
+                        <p>DP-900: Conceitos fundamentais de dados e analytics.</p>
+                        <a href="#" class="btn btn-primary">Estudar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forum Content -->
+    <section id="forum" class="main-content">
+        <div class="container">
+            <div class="section-title">
+                <h2>Fórum de Discussão</h2>
+                <p>Tire dúvidas, compartilhe experiências e conecte-se com outros profissionais</p>
+            </div>
+
+            <div class="forum-container">
+                <div class="forum-categories">
+                    <h3>Categorias</h3>
+                    <ul class="category-list">
+                        <li><a href="#">Certificações Microsoft <span class="category-count">24</span></a></li>
+                        <li><a href="#">Certificações AWS <span class="category-count">18</span></a></li>
+                        <li><a href="#">LPIC-1 e LPIC-2 <span class="category-count">15</span></a></li>
+                        <li><a href="#">ITIL e Governança <span class="category-count">12</span></a></li>
+                        <li><a href="#">Security & Cybersecurity <span class="category-count">9</span></a></li>
+                        <li><a href="#">Cloud Computing <span class="category-count">21</span></a></li>
+                        <li><a href="#">Dúvidas Gerais <span class="category-count">32</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="forum-posts">
+                    <div class="post">
+                        <div class="post-header">
+                            <a href="#" class="post-title">Dúvida sobre LPIC-1 - Comandos essenciais</a>
+                            <div class="post-meta">por João Silva • 2 horas atrás</div>
+                        </div>
+                        <div class="post-excerpt">
+                            <p>Estou estudando para a LPIC-1 e tenho dúvidas sobre os comandos mais importantes para o exame. Alguém tem uma lista dos comandos que mais caem?</p>
+                        </div>
+                        <div class="post-footer">
+                            <span><i class="far fa-comment"></i> 7 respostas</span>
+                            <span><i class="far fa-eye"></i> 42 visualizações</span>
+                        </div>
+                    </div>
+
+                    <div class="post">
+                        <div class="post-header">
+                            <a href="#" class="post-title">Material de estudo para ITIL 4 Foundation</a>
+                            <div class="post-meta">por Maria Santos • 1 dia atrás</div>
+                        </div>
+                        <div class="post-excerpt">
+                            <p>Alguém tem recomendações de materiais de estudo para a ITIL 4 Foundation? Estou procurando livros, videoaulas e simulados.</p>
+                        </div>
+                        <div class="post-footer">
+                            <span><i class="far fa-comment"></i> 12 respostas</span>
+                            <span><i class="far fa-eye"></i> 87 visualizações</span>
+                        </div>
+                    </div>
+
+                    <div class="post">
+                        <div class="post-header">
+                            <a href="#" class="post-title">Experiência com exame Security+</a>
+                            <div class="post-meta">por Carlos Oliveira • 3 dias atrás</div>
+                        </div>
+                        <div class="post-excerpt">
+                            <p>Acabei de fazer o exame Security+ e gostaria de compartilhar minha experiência e dar algumas dicas para quem vai fazer.</p>
+                        </div>
+                        <div class="post-footer">
+                            <span><i class="far fa-comment"></i> 23 respostas</span>
+                            <span><i class="far fa-eye"></i> 156 visualizações</span>
+                        </div>
+                    </div>
+
+                    <div class="post">
+                        <div class="post-header">
+                            <a href="#" class="post-title">Diferença entre LPIC-1 e LPIC-2</a>
+                            <div class="post-meta">por Ana Costa • 5 dias atrás</div>
+                        </div>
+                        <div class="post-excerpt">
+                            <p>Estou com dificuldades para entender a diferença entre o conteúdo da LPIC-1 e LPIC-2. Alguém pode explicar os principais tópicos de cada uma?</p>
+                        </div>
+                        <div class="post-footer">
+                            <span><i class="far fa-comment"></i> 9 respostas</span>
+                            <span><i class="far fa-eye"></i> 74 visualizações</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="btn btn-primary new-post-btn">Nova Discussão</a>
+        </div>
+    </section>
+
+    <!-- Study Materials Content -->
+    <section id="materiais" class="main-content">
+        <div class="container">
+            <div class="section-title">
+                <h2>Material de Estudo</h2>
+                <p>Recursos selecionados para sua preparação</p>
+            </div>
+
+            <div class="materials-grid">
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <div class="material-content">
+                        <h3>Microsoft Azure</h3>
+                        <p>Guias de estudo, resumos e recursos para certificações Azure.</p>
+                        <a href="#" class="btn btn-primary">Acessar</a>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <div class="material-content">
+                        <h3>Amazon AWS</h3>
+                        <p>Material para Cloud Practitioner, Solutions Architect e outras.</p>
+                        <a href="#" class="btn btn-primary">Acessar</a>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="material-content">
+                        <h3>LPIC-1 e LPIC-2</h3>
+                        <p>Recursos para certificações Linux Professional Institute.</p>
+                        <a href="#" class="btn btn-primary">Acessar</a>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="material-content">
+                        <h3>ITIL 4</h3>
+                        <p>Guias, resumos e material para certificação ITIL.</p>
+                        <a href="#" class="btn btn-primary">Acessar</a>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="material-content">
+                        <h3>Security+</h3>
+                        <p>Material para preparação da certificação CompTIA Security+.</p>
+                        <a href="#" class="btn btn-primary">Acessar</a>
+                    </div>
+                </div>
+
+                <div class="material-card">
+                    <div class="material-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="material-content">
+                        <h3>CCNA</h3>
+                        <p>Recursos para Cisco Certified Network Associate.</p>
+                        <a href="#" class="btn btn-primary">Acessar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title" style="margin-top: 4rem;">
+                <h2>Videoaulas</h2>
+                <p>Aprenda com instrutores especializados</p>
+            </div>
+
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-play-circle"></i> LPIC-1: Comandos Essenciais</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Curso completo cobrindo todos os comandos essenciais para o exame LPIC-1.</p>
+                        <p><strong>Duração:</strong> 6 horas</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Assistir</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-play-circle"></i> ITIL 4 Foundation</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Videoaulas cobrindo o framework ITIL 4 e conceitos de gerenciamento de serviços.</p>
+                        <p><strong>Duração:</strong> 5 horas</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Assistir</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-play-circle"></i> Security+ SY0-601</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Preparação completa para o exame CompTIA Security+.</p>
+                        <p><strong>Duração:</strong> 12 horas</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Assistir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulados Content -->
     <section id="simulados" class="main-content">
         <div class="container">
             <div class="section-title">
@@ -687,112 +1085,105 @@
                 <i class="fas fa-cloud-upload-alt"></i>
                 <h3>Compartilhe Seu Simulado</h3>
                 <p>Faça upload de simulados HTML para compartilhar com a comunidade</p>
-                <div class="btn-group">
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-upload"></i>Upload de Arquivo
-                    </a>
-                    <a href="#" class="btn btn-outline">
-                        <i class="fas fa-question-circle"></i>Como Funciona
-                    </a>
-                </div>
+                <a href="#" class="btn btn-primary">Upload de Arquivo</a>
             </div>
 
             <div class="simulados-container">
-                <!-- ITIL 4 Foundation - BOTÃO ORGANIZADO -->
+                <!-- ITIL 4 Foundation - COM BOTÃO PARA MOSTRAR SIMULADOS -->
                 <div class="simulado-card">
                     <div class="card-header">
                         <h3><i class="fas fa-file-alt"></i> ITIL 4 Foundation</h3>
                     </div>
                     <div class="card-body">
                         <span class="simulado-badge">11 Simulados Disponíveis</span>
-                        <p>Pacote completo de simulados para certificação ITIL 4 Foundation. Inclui questões sobre conceitos básicos, dimensões do serviço, cadeia de valor e práticas gerais.</p>
+                        <p>Pacote completo de simulados para certificação ITIL 4 Foundation.</p>
                         
-                        <div class="btn-group-vertical">
-                            <button class="btn btn-primary" onclick="toggleSimulados('itil4')" id="btn-itil4">
-                                <i class="fas fa-list"></i> Ver Todos os 11 Simulados
+                        <!-- Botão para mostrar simulados -->
+                        <div style="text-align: center; margin: 15px 0;">
+                            <button class="btn btn-outline" onclick="toggleSimulados('itil4')" id="btn-itil4" style="width: 100%;">
+                                📋 Ver Todos os 11 Simulados
                             </button>
                         </div>
                         
-                        <div class="simulados-lista" id="lista-itil4" style="display: none;">
-                            <div class="simulado-item">
-                                <div>
-                                    <strong>✅ Simulado 1</strong>
-                                    <div style="font-size: 0.8em; color: var(--gray);">Conceitos Básicos - 20 questões</div>
-                                </div>
-                                <a href="simulado-itil4-01.html" class="btn btn-success btn-sm">Iniciar</a>
+                        <!-- Lista dos Simulados ITIL 4 (inicialmente oculta) -->
+                        <div class="simulados-lista" id="lista-itil4" style="display: none; margin-top: 15px; max-height: 300px; overflow-y: auto;">
+                            <!-- SIMULADO 1 - DISPONÍVEL -->
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee;">
+                                <span>✅ Simulado 1 - Conceitos Básicos</span>
+                                <a href="simulado-itil4-01.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.8em;">Iniciar</a>
                             </div>
                             
-                            <div class="simulado-item">
-                                <div>
-                                    <strong>✅ Simulado 2</strong>
-                                    <div style="font-size: 0.8em; color: var(--gray);">Dimensões do Serviço - 25 questões</div>
-                                </div>
-                                <a href="simulado-itil4-02.html" class="btn btn-success btn-sm">Iniciar</a>
+                            <!-- SIMULADO 2 - DISPONÍVEL -->
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee;">
+                                <span>✅ Simulado 2 - Dimensões do Serviço</span>
+                                <a href="simulado-itil4-02.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.8em;">Iniciar</a>
                             </div>
                             
-                            <div class="simulado-item">
-                                <div>
-                                    <strong>✅ Simulado 3</strong>
-                                    <div style="font-size: 0.8em; color: var(--gray);">Cadeia de Valor - 30 questões</div>
-                                </div>
-                                <a href="simulado-itil4-03.html" class="btn btn-success btn-sm">Iniciar</a>
+                            <!-- SIMULADO 3 - DISPONÍVEL -->
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee;">
+                                <span>✅ Simulado 3 - Cadeia de Valor</span>
+                                <a href="simulado-itil4-03.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.8em;">Iniciar</a>
                             </div>
                             
-                            <div class="simulado-item" style="opacity: 0.8;">
-                                <div>
-                                    <strong>✅ Simulado 4</strong>
-                                    <div style="font-size: 0.8em; color: var(--gray);">Práticas Gerais - 25 questões</div>
-                                </div>
-                                <a href="simulado-itil4-04.html" class="btn btn-success btn-sm">Iniciar</a>
+                           <!-- SIMULADO 4 - DISPONÍVEL -->
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>✅ Simulado 4 - Práticas Gerais</span>
+                                <a href="simulado-itil4-04.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.8em;">Iniciar</a>
                             </div>
                             
-                            <div class="simulado-item" style="opacity: 0.6;">
-                                <div>
-                                    <strong>⏳ Simulado 5</strong>
-                                    <div style="font-size: 0.8em; color: var(--gray);">Gerenciamento de Serviço - Em breve</div>
-                                </div>
-                                <button class="btn btn-secondary btn-sm" disabled>Em Breve</button>
+                             <!-- SIMULADO 5-11 - EM BREVE -->
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>⏳ Simulado 5 - Gerenciamento de Serviço</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
                             </div>
                             
-                            <div class="simulado-item" style="opacity: 0.6;">
-                                <div>
-                                    <strong>⏳ Simulado 6</strong>
-                                    <div style="font-size: 0.8em; color: var(--gray);">Princípios Orientadores - Em breve</div>
-                                </div>
-                                <button class="btn btn-secondary btn-sm" disabled>Em Breve</button>
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>⏳ Simulado 6 - Princípios Orientadores</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
+                            </div>
+                            
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>⏳ Simulado 7 - Melhoria Contínua</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
+                            </div>
+                            
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>⏳ Simulado 8 - Governança</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
+                            </div>
+                            
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>⏳ Simulado 9 - Modelos de Mudança</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
+                            </div>
+                            
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; opacity: 0.6;">
+                                <span>⏳ Simulado 10 - Práticas Técnicas</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
+                            </div>
+                            
+                            <div class="simulado-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; opacity: 0.6;">
+                                <span>⏳ Simulado 11 - Final Completo</span>
+                                <button class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 0.8em;" disabled>Em Breve</button>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                            <small><strong>Progresso:</strong> 4 de 11 disponíveis • 120 questões</small>
-                            <div class="btn-group">
-                                <a href="#" class="btn btn-outline btn-sm">
-                                    <i class="fas fa-chart-bar"></i>Estatísticas
-                                </a>
-                            </div>
-                        </div>
+                        <small><strong>Progresso:</strong> 3 de 11 disponíveis • 120 questões</small>
                     </div>
                 </div>
-                                       
+                                               
                 <div class="simulado-card">
                     <div class="card-header">
                         <h3><i class="fas fa-server"></i> LPIC-1</h3>
                     </div>
                     <div class="card-body">
                         <span class="simulado-badge">60 questões</span>
-                        <p>Simulado completo para Linux Professional Institute Certification Level 1. Cobre administração de sistema, comandos essenciais e configuração de redes.</p>
-                        <p><strong>⏱ Tempo estimado:</strong> 90 minutos</p>
+                        <p>Simulado para Linux Professional Institute Certification Level 1.</p>
+                        <p><strong>Tempo estimado:</strong> 90 minutos</p>
                     </div>
                     <div class="card-footer">
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-primary">
-                                <i class="fas fa-play"></i>Iniciar Simulado
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i>Detalhes
-                            </a>
-                        </div>
+                        <a href="#" class="btn btn-primary">Iniciar Simulado</a>
                     </div>
                 </div>
 
@@ -802,18 +1193,11 @@
                     </div>
                     <div class="card-body">
                         <span class="simulado-badge">45 questões</span>
-                        <p>Simulado para CompTIA Security+ (SY0-601). Abrange ameaças, ataques, tecnologias, arquitetura e gerenciamento de riscos.</p>
-                        <p><strong>⏱ Tempo estimado:</strong> 90 minutos</p>
+                        <p>Simulado para CompTIA Security+ (SY0-601).</p>
+                        <p><strong>Tempo estimado:</strong> 90 minutos</p>
                     </div>
                     <div class="card-footer">
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-primary">
-                                <i class="fas fa-play"></i>Iniciar Simulado
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i>Detalhes
-                            </a>
-                        </div>
+                        <a href="#" class="btn btn-primary">Iniciar Simulado</a>
                     </div>
                 </div>
 
@@ -823,18 +1207,11 @@
                     </div>
                     <div class="card-body">
                         <span class="simulado-badge">50 questões</span>
-                        <p>Simulado para AWS Certified Cloud Practitioner. Conceitos de nuvem, serviços AWS, segurança, arquitetura e preços.</p>
-                        <p><strong>⏱ Tempo estimado:</strong> 90 minutos</p>
+                        <p>Simulado para AWS Certified Cloud Practitioner.</p>
+                        <p><strong>Tempo estimado:</strong> 90 minutos</p>
                     </div>
                     <div class="card-footer">
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-primary">
-                                <i class="fas fa-play"></i>Iniciar Simulado
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-info-circle"></i>Detalhes
-                            </a>
-                        </div>
+                        <a href="#" class="btn btn-primary">Iniciar Simulado</a>
                     </div>
                 </div>
 
@@ -843,22 +1220,16 @@
                         <h3><i class="fas fa-plus-circle"></i> Adicionar Simulado</h3>
                     </div>
                     <div class="card-body">
-                        <p>Compartilhe seu próprio simulado com a comunidade e ajude outros profissionais em sua jornada de certificação.</p>
+                        <p>Compartilhe seu próprio simulado com a comunidade.</p>
                     </div>
                     <div class="card-footer">
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-upload"></i>Upload
-                            </a>
-                            <a href="#" class="btn btn-outline">
-                                <i class="fas fa-guidelines"></i>Diretrizes
-                            </a>
-                        </div>
+                        <a href="#" class="btn btn-outline">Upload</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+            
 
     <!-- Footer -->
     <footer>
@@ -868,13 +1239,45 @@
                     <h3>StudyCert</h3>
                     <p>Sua plataforma completa para preparação e certificação em Tecnologia da Informação.</p>
                     <div class="social-links">
-                        <a href="#" class="btn btn-outline btn-sm"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="btn btn-outline btn-sm"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="btn btn-outline btn-sm"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="btn btn-outline btn-sm"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
+
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-target="home">Início</a></li>
+                        <li><a href="#" data-target="certificacoes">Certificações</a></li>
+                        <li><a href="#" data-target="forum">Fórum</a></li>
+                        <li><a href="#" data-target="materiais">Material de Estudo</a></li>
+                        <li><a href="#" data-target="simulados">Simulados</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Certificações</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Microsoft Azure</a></li>
+                        <li><a href="#">AWS</a></li>
+                        <li><a href="#">LPIC-1 e LPIC-2</a></li>
+                        <li><a href="#">ITIL 4</a></li>
+                        <li><a href="#">Security+</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contato@studyCert.com</li>
+                        <li><i class="fas fa-phone"></i> (11) 9999-9999</li>
+                        <li><i class="fas fa-map-marker-alt"></i> São Paulo, SP</li>
+                    </ul>
+                </div>
             </div>
+
             <div class="copyright">
                 <p>&copy; 2023 StudyCert. Todos os direitos reservados.</p>
             </div>
@@ -915,30 +1318,24 @@
             if (uploadBtn) {
                 uploadBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    // Efeito de loading
-                    this.classList.add('loading');
-                    setTimeout(() => {
-                        this.classList.remove('loading');
-                        alert('Funcionalidade de upload será implementada em breve!');
-                    }, 1500);
+                    alert('Funcionalidade de upload será implementada em breve!');
                 });
             }
         });
-
+    </script>
+    <script>
         function toggleSimulados(tipo) {
             const lista = document.getElementById(`lista-${tipo}`);
             const botao = document.getElementById(`btn-${tipo}`);
             
             if (lista.style.display === 'none') {
                 lista.style.display = 'block';
-                botao.innerHTML = '<i class="fas fa-folder-open"></i> Ocultar Simulados';
-                botao.classList.remove('btn-primary');
-                botao.classList.add('btn-warning');
+                botao.innerHTML = '📁 Ocultar Simulados';
+                botao.classList.add('btn-primary');
             } else {
                 lista.style.display = 'none';
-                botao.innerHTML = '<i class="fas fa-list"></i> Ver Todos os 11 Simulados';
-                botao.classList.remove('btn-warning');
-                botao.classList.add('btn-primary');
+                botao.innerHTML = '📋 Ver Todos os 11 Simulados';
+                botao.classList.remove('btn-primary');
             }
         }
     </script>
