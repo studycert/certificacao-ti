@@ -1937,6 +1937,19 @@ O propósito da prática de gerenciamento de segurança da informação é [?] a
             }
         `;
         document.head.appendChild(style);
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startScreen = document.getElementById('start-screen');
+            const questionContainer = document.getElementById('question-container');
+            const startBtn = document.getElementById('start-btn');
+            
+            // Iniciar o simulado
+            startBtn.addEventListener('click', function() {
+                startScreen.style.display = 'none';
+                questionContainer.style.display = 'block';
+            });
+        });
+    </script>
  
 </body>
 </html>
