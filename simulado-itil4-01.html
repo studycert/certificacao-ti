@@ -121,11 +121,18 @@
             font-weight: 500;
             font-size: 1em;
             transition: color 0.3s;
+            padding: 10px 20px;
+            border: 2px solid #3498db;
+            border-radius: 50px;
+            transition: all 0.3s ease;
         }
 
         .back-link:hover {
-            color: #1a2a6c;
-            text-decoration: underline;
+            color: white;
+            background: #3498db;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
         }
 
         /* Área do Exame (inicialmente oculta) */
@@ -529,7 +536,7 @@
             </button>
             
             <div>
-                <a href="#" class="back-link">← Voltar para Simulados</a>
+                <a href="#" class="back-link" id="back-link">← Voltar para Simulados</a>
             </div>
         </div>
 
@@ -671,7 +678,8 @@
             timer: document.getElementById('timer'),
             questionGrid: document.getElementById('question-grid'),
             feedback: document.getElementById('feedback'),
-            finishBtnRow: document.getElementById('finish-btn-row')
+            finishBtnRow: document.getElementById('finish-btn-row'),
+            backLink: document.getElementById('back-link')
         };
 
         // Inicialização
@@ -687,6 +695,12 @@
             document.getElementById('review-btn').addEventListener('click', showReview);
             document.getElementById('restart-btn').addEventListener('click', resetExam);
             document.getElementById('full-report-btn').addEventListener('click', showFullReport);
+            
+            // CORREÇÃO: Adicionar evento ao botão "Voltar para Simulados"
+            elements.backLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                goBackToSimulados();
+            });
 
             elements.totalQuestions.textContent = questions.length;
             createQuestionGrid();
@@ -695,6 +709,20 @@
             elements.startScreen.style.display = 'block';
             elements.examArea.style.display = 'none';
             elements.resultsScreen.style.display = 'none';
+        }
+
+        // CORREÇÃO: Função para voltar para a página de simulados
+        function goBackToSimulados() {
+            if (confirm('Deseja voltar para a página de simulados? Todo o progresso será perdido.')) {
+                // Aqui você pode redirecionar para a página de simulados
+                // window.location.href = 'simulados.html';
+                
+                // Por enquanto, vamos apenas mostrar um alerta
+                alert('Redirecionando para a página de simulados...');
+                
+                // Se você tiver uma página de simulados, descomente a linha abaixo:
+                // window.location.href = 'simulados.html';
+            }
         }
 
         function startExam() {
