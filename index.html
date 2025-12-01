@@ -625,170 +625,138 @@
             }
         }
                     
-       /* ========== CORREÇÃO DO HOVER DOS SIMULADOS ========== */
-
-/* LISTA DE SIMULADOS - AGORA FUNCIONAL */
-.simulados-lista {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    margin-top: 10px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    z-index: 1000;
-    max-height: 400px;
-    overflow-y: auto;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
-
-/* QUANDO O CARD ESTIVER EM HOVER, MOSTRA A LISTA */
-.simulado-card:hover .simulados-lista {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    animation: slideDown 0.3s ease-out;
-}
-
-/* TAMBÉM MOSTRA QUANDO A PRÓPRIA LISTA ESTIVER EM HOVER */
-.simulados-lista:hover {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-/* ANIMAÇÃO DE APARECIMENTO */
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* GARANTIR QUE O CARD TENHA POSITION RELATIVE */
-.simulado-card {
-    position: relative !important;
-}
-
-/* MELHORIAS NA LISTA */
-.simulado-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-    transition: background-color 0.2s;
-}
-
-.simulado-item:hover {
-    background-color: #f8f9fa;
-    border-radius: 4px;
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-.simulado-item:last-child {
-    border-bottom: none;
-}
-
-/* BOTÃO HOVER TRIGGER MELHORADO */
-.hover-trigger {
-    position: relative;
-    padding: 12px 20px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border: 2px dashed #3498db;
-    border-radius: 8px;
-    color: #3498db;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    margin: 20px 0;
-    overflow: hidden;
-}
-
-.hover-trigger:hover {
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
-    border-color: #2980b9;
-    border-style: solid;
-}
-
-/* EFEITO DE BRILHO NO HOVER TRIGGER */
-.hover-trigger::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.7s;
-    border-radius: 6px;
-}
-
-.hover-trigger:hover::before {
-    left: 100%;
-}
-
-/* BOTÕES PEQUENOS ESTILIZADOS */
-.btn-sm {
-    padding: 6px 16px !important;
-    font-size: 0.85em !important;
-    border-radius: 4px !important;
-    min-width: 80px;
-    text-align: center;
-}
-
-/* STATUS DOS SIMULADOS */
-.simulado-item span:first-child {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* RESPONSIVIDADE */
-@media (max-width: 768px) {
-    .simulados-lista {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) !important;
-        width: 90vw;
-        max-height: 70vh;
-        z-index: 9999;
-    }
-    
-    .simulado-card:hover .simulados-lista {
-        animation: fadeInMobile 0.3s ease;
-    }
-    
-    @keyframes fadeInMobile {
-        from {
+        /* ========== CORREÇÃO DOS SIMULADOS ========== */
+        
+        /* BOTÃO MENOR PARA VER SIMULADOS */
+        .show-simulados-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            margin: 10px 0;
+            width: 180px;
+        }
+        
+        .show-simulados-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        /* LISTA DE SIMULADOS - ESTILO CORRIGIDO */
+        .simulados-lista {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 10px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            z-index: 1000;
+            max-height: 400px;
+            overflow-y: auto;
             opacity: 0;
-            transform: translate(-50%, -40%) !important;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
         }
-        to {
+        
+        /* MOSTRAR LISTA QUANDO VISÍVEL */
+        .simulados-lista.visible {
+            display: block;
             opacity: 1;
-            transform: translate(-50%, -50%) !important;
+            transform: translateY(0);
         }
-    }
-}
+        
+        /* ANIMAÇÃO DE APARECIMENTO */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* GARANTIR QUE O CARD TENHA POSITION RELATIVE */
+        .simulado-card {
+            position: relative !important;
+        }
+        
+        /* MELHORIAS NA LISTA */
+        .simulado-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s;
+        }
+        
+        .simulado-item:hover {
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        
+        .simulado-item:last-child {
+            border-bottom: none;
+        }
+        
+        .simulado-item span:first-child {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* BOTÕES PEQUENOS */
+        .btn-sm {
+            padding: 6px 16px !important;
+            font-size: 0.85em !important;
+            border-radius: 4px !important;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .simulados-lista {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) !important;
+                width: 90vw;
+                max-height: 70vh;
+                z-index: 9999;
+            }
+            
+            .simulados-lista.visible {
+                animation: fadeInMobile 0.3s ease;
+            }
+            
+            @keyframes fadeInMobile {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -40%) !important;
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) !important;
+                }
+            }
+        }
     </style>
 </head>
 <body>
@@ -1262,8 +1230,8 @@
             </div>
 
             <div class="simulados-container">
-                <!-- ITIL 4 Foundation - COM HOVER FUNCIONAL -->
-                <div class="simulado-card">
+                <!-- ITIL 4 Foundation - COM BOTÃO MENOR -->
+                <div class="simulado-card" id="itil4-card">
                     <div class="card-header">
                         <h3><i class="fas fa-file-alt"></i> ITIL 4 Foundation</h3>
                     </div>
@@ -1271,13 +1239,13 @@
                         <span class="simulado-badge">11 Simulados Disponíveis</span>
                         <p>Pacote completo de simulados para certificação ITIL 4 Foundation.</p>
                         
-                        <!-- Botão para mostrar simulados -->
-                        <div class="hover-trigger">
-                            📋 Passe o mouse aqui para ver os 11 simulados
-                        </div>
+                        <!-- Botão menor para mostrar simulados -->
+                        <button class="show-simulados-btn" id="show-simulados-btn">
+                            <i class="fas fa-list"></i> Ver 11 Simulados
+                        </button>
                         
                         <!-- Lista dos Simulados ITIL 4 -->
-                        <div class="simulados-lista">
+                        <div class="simulados-lista" id="simulados-lista">
                             <!-- SIMULADO 1 - DISPONÍVEL -->
                             <div class="simulado-item">
                                 <span>✅ Simulado 1 - Conceitos Básicos</span>
@@ -1491,123 +1459,36 @@
                     alert('Funcionalidade de upload será implementada em breve!');
                 });
             }
-        });
-        // ========== CÓDIGO PARA OS SIMULADOS ITIL 4 ==========
-
-// Configuração dos simulados ITIL 4
-document.addEventListener('DOMContentLoaded', function() {
-    // Encontra o card dos simulados ITIL 4
-    const itil4Card = document.querySelector('.simulado-card:first-child');
-    const hoverTrigger = document.querySelector('.hover-trigger');
-    const simuladosLista = document.querySelector('.simulados-lista');
-    
-    if (itil4Card && hoverTrigger && simuladosLista) {
-        console.log('✅ Elementos dos simulados ITIL 4 encontrados');
-        
-        // Garante que a lista comece oculta
-        simuladosLista.style.display = 'none';
-        
-        // Adiciona IDs para melhor controle
-        itil4Card.id = 'itil4-simulado-card';
-        hoverTrigger.id = 'itil4-hover-trigger';
-        simuladosLista.id = 'itil4-simulados-lista';
-        
-        // Controle do hover
-        let hideTimeout;
-        
-        // Mostrar lista ao entrar no card
-        itil4Card.addEventListener('mouseenter', function() {
-            clearTimeout(hideTimeout);
-            simuladosLista.style.display = 'block';
-            // Força reflow para ativar animação
-            void simuladosLista.offsetWidth;
-            simuladosLista.style.opacity = '1';
-            simuladosLista.style.transform = 'translateY(0)';
-        });
-        
-        // Mostrar lista ao entrar no trigger
-        hoverTrigger.addEventListener('mouseenter', function() {
-            clearTimeout(hideTimeout);
-            simuladosLista.style.display = 'block';
-            void simuladosLista.offsetWidth;
-            simuladosLista.style.opacity = '1';
-            simuladosLista.style.transform = 'translateY(0)';
-        });
-        
-        // Esconder lista ao sair do card (com delay)
-        itil4Card.addEventListener('mouseleave', function(e) {
-            // Verifica se o mouse está indo para a lista
-            if (!simuladosLista.contains(e.relatedTarget)) {
-                hideTimeout = setTimeout(function() {
-                    simuladosLista.style.opacity = '0';
-                    simuladosLista.style.transform = 'translateY(-10px)';
-                    setTimeout(function() {
-                        simuladosLista.style.display = 'none';
-                    }, 300);
-                }, 300);
-            }
-        });
-        
-        // Manter lista visível quando hover nela
-        simuladosLista.addEventListener('mouseenter', function() {
-            clearTimeout(hideTimeout);
-            simuladosLista.style.opacity = '1';
-            simuladosLista.style.transform = 'translateY(0)';
-        });
-        
-        // Esconder lista ao sair dela
-        simuladosLista.addEventListener('mouseleave', function(e) {
-            // Verifica se o mouse está indo para o card
-            if (!itil4Card.contains(e.relatedTarget)) {
-                hideTimeout = setTimeout(function() {
-                    simuladosLista.style.opacity = '0';
-                    simuladosLista.style.transform = 'translateY(-10px)';
-                    setTimeout(function() {
-                        simuladosLista.style.display = 'none';
-                    }, 300);
-                }, 300);
-            }
-        });
-        
-        // Para mobile: clique no trigger
-        hoverTrigger.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
-                e.stopPropagation();
-                if (simuladosLista.style.display === 'block') {
-                    simuladosLista.style.opacity = '0';
-                    simuladosLista.style.transform = 'translateY(-10px)';
-                    setTimeout(function() {
-                        simuladosLista.style.display = 'none';
-                    }, 300);
-                } else {
-                    simuladosLista.style.display = 'block';
-                    void simuladosLista.offsetWidth;
-                    simuladosLista.style.opacity = '1';
-                    simuladosLista.style.transform = 'translateY(0)';
-                }
-            }
-        });
-        
-        // Fechar ao clicar fora (mobile)
-        document.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768 && 
-                simuladosLista.style.display === 'block' &&
-                !itil4Card.contains(e.target) && 
-                !simuladosLista.contains(e.target)) {
+            
+            // ========== SIMULADOS ITIL 4 - FUNCIONALIDADE SIMPLES ==========
+            const showSimuladosBtn = document.getElementById('show-simulados-btn');
+            const simuladosLista = document.getElementById('simulados-lista');
+            const itil4Card = document.getElementById('itil4-card');
+            
+            if (showSimuladosBtn && simuladosLista) {
+                // Mostrar/ocultar lista ao clicar no botão
+                showSimuladosBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    simuladosLista.classList.toggle('visible');
+                });
                 
-                simuladosLista.style.opacity = '0';
-                simuladosLista.style.transform = 'translateY(-10px)';
-                setTimeout(function() {
-                    simuladosLista.style.display = 'none';
-                }, 300);
+                // Fechar lista ao clicar fora
+                document.addEventListener('click', function(e) {
+                    if (!itil4Card.contains(e.target) && !simuladosLista.contains(e.target)) {
+                        simuladosLista.classList.remove('visible');
+                    }
+                });
+                
+                // Para mobile: fechar ao rolar
+                window.addEventListener('scroll', function() {
+                    if (window.innerWidth <= 768) {
+                        simuladosLista.classList.remove('visible');
+                    }
+                });
+                
+                console.log('✅ Sistema de simulados configurado!');
             }
         });
-        
-        console.log('🎯 Sistema de hover dos simulados ITIL 4 configurado!');
-    } else {
-        console.warn('⚠️ Não foi possível encontrar todos os elementos dos simulados');
-    }
-});
     </script>
 </body>
 </html>
