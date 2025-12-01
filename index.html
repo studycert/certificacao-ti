@@ -1135,12 +1135,12 @@ nav a:hover, nav a.active {
             <span class="simulado-badge">11 Simulados Disponíveis</span>
             <p>Pacote completo de simulados para certificação ITIL 4 Foundation.</p>
             
-            <!-- Botão para mostrar simulados -->
-            <div style="text-align: center; margin: 15px 0;">
-                <button class="btn btn-outline btn-ver-simulados" onclick="toggleSimulados('itil4')" id="btn-itil4" style="width: 100%;">
-    📋 Ver Todos os 11 Simulados
-                </button>
-            </div>
+            <!-- Botão para mostrar simulados COM HOVER -->
+<div style="text-align: center; margin: 15px 0;">
+    <div class="btn-hover-area" onmouseover="mostrarSimulados()" onmouseout="ocultarSimulados()">
+        📋 Passe o mouse aqui para ver os 11 simulados
+    </div>
+</div>
             
             <!-- Lista dos Simulados ITIL 4 (inicialmente oculta) -->
             <div class="simulados-lista" id="lista-itil4" style="display: none; margin-top: 15px; max-height: 300px; overflow-y: auto;">
@@ -1375,6 +1375,64 @@ function toggleSimulados(tipo) {
         botao.classList.remove('btn-primary');
     }
 }
+        } else {
+        lista.style.display = 'none';
+        botao.innerHTML = '📋 Ver Todos os 11 Simulados';
+        botao.classList.remove('btn-primary');
+    }
+}
+
+// FUNÇÕES PARA HOVER - ADICIONE AQUI
+function mostrarSimulados() {
+    const lista = document.getElementById('lista-itil4');
+    const botao = document.getElementById('btn-itil4');
+    if (lista) {
+        lista.style.display = 'block';
+        if (botao) {
+            botao.innerHTML = '📁 Simulados Visíveis';
+            botao.classList.add('btn-primary');
+        }
+    }
+}
+
+function ocultarSimulados() {
+    const lista = document.getElementById('lista-itil4');
+    const botao = document.getElementById('btn-itil4');
+    if (lista) {
+        lista.style.display = 'none';
+        if (botao) {
+            botao.innerHTML = '📋 Ver Todos os 11 Simulados';
+            botao.classList.remove('btn-primary');
+        }
+    }
+}
+
+// OU alternativa com hover puro via CSS
+document.addEventListener('DOMContentLoaded', function() {
+    const botao = document.getElementById('btn-itil4');
+    const card = document.querySelector('.simulado-card');
+    
+    if (botao && card) {
+        // Hover no botão
+        botao.addEventListener('mouseenter', function() {
+            const lista = document.getElementById('lista-itil4');
+            if (lista) {
+                lista.style.display = 'block';
+                this.innerHTML = '📁 Simulados Visíveis';
+                this.classList.add('btn-primary');
+            }
+        });
+        
+        botao.addEventListener('mouseleave', function() {
+            const lista = document.getElementById('lista-itil4');
+            if (lista) {
+                lista.style.display = 'none';
+                this.innerHTML = '📋 Ver Todos os 11 Simulados';
+                this.classList.remove('btn-primary');
+            }
+        });
+    }
+});
 </script>
 </body>
 </html>
