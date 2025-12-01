@@ -652,7 +652,28 @@ nav a:hover, nav a.active {
     color: white !important;
     border-color: #3498db !important;
 }
-    
+    /* EFEITO HOVER SIMPLES */
+.hover-trigger:hover + .hover-list,
+.hover-list:hover {
+    display: block !important;
+    animation: fadeIn 0.3s ease;
+}
+
+.hover-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Para permitir clicar */
+.hover-list a,
+.hover-list button {
+    pointer-events: auto !important;
+}
     </style>
 </head>
 <body>
@@ -1364,56 +1385,7 @@ nav a:hover, nav a.active {
 // CÓDIGO CORRETO - SUBSTITUA TODO O SCRIPT
     </script>
     <script>
-function toggleSimulados(tipo) {
-    const lista = document.getElementById(`lista-${tipo}`);
-    const botao = document.getElementById(`btn-${tipo}`);
-    
-    if (lista.style.display === 'none') {
-        lista.style.display = 'block';
-        botao.innerHTML = '📁 Ocultar Simulados';
-        botao.classList.add('btn-primary');
-    } else {
-        lista.style.display = 'none';
-        botao.innerHTML = '📋 Ver Todos os 11 Simulados';
-        botao.classList.remove('btn-primary');
-    }
-}
 
-// FUNÇÕES PARA HOVER
-function mostrarSimulados() {
-    const lista = document.getElementById('lista-itil4');
-    const botao = document.getElementById('btn-itil4');
-    if (lista) {
-        lista.style.display = 'block';
-        if (botao) {
-            botao.innerHTML = '📁 Simulados Visíveis';
-            botao.classList.add('btn-primary');
-        }
-    }
-}
-
-function ocultarSimulados() {
-    const lista = document.getElementById('lista-itil4');
-    const botao = document.getElementById('btn-itil4');
-    if (lista) {
-        lista.style.display = 'none';
-        if (botao) {
-            botao.innerHTML = '📋 Ver Todos os 11 Simulados';
-            botao.classList.remove('btn-primary');
-        }
-    }
-}
-
-// Configura hover automático
-document.addEventListener('DOMContentLoaded', function() {
-    const botao = document.getElementById('btn-itil4');
-    
-    if (botao) {
-        // Adiciona eventos de hover
-        botao.addEventListener('mouseenter', mostrarSimulados);
-        botao.addEventListener('mouseleave', ocultarSimulados);
-    }
-});
 </script>
 </body>
 </html>
