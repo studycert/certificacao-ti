@@ -6,37 +6,6 @@
     <title>StudyCert - Sua Plataforma de Certificação em TI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
- /* Botão ativo na navegação - Estilo igual ao botão Cadastrar */
-nav a.active {
-    background-color: #3498db !important; /* Azul esverdeado */
-    color: white !important; /* Fonte branca */
-    border: none !important; /* Sem borda */
-    box-shadow: 0 4px 8px rgba(26, 188, 156, 0.3); /* Sombra azul esverdeada */
-    backdrop-filter: none; /* Remove o blur */
-    animation: pulseActive 0.3s ease;
-}
-
-@keyframes pulseActive {
-    0% {
-        background-color: transparent;
-    }
-    100% {
-        background-color: rgba(52, 152, 219, 0.2);
-    }
-}
-
-/* Efeito adicional para o botão ativo - remove qualquer borda residual */
-nav a {
-    border: none !important;
-    outline: none !important;
-}
-
-/* Garantir que o hover também funcione corretamente */
-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: none !important;
-}
-
         * {
             margin: 0;
             padding: 0;
@@ -68,7 +37,7 @@ nav a:hover {
             padding: 0 20px;
         }
 
-        /* Header - BOTÕES SEM BORDA */
+        /* Header */
         header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
             color: white;
@@ -105,7 +74,7 @@ nav a:hover {
             color: var(--secondary);
         }
 
-        /* NAVEGAÇÃO - BOTÕES SEM BORDA */
+        /* NAVEGAÇÃO SIMPLES E FUNCIONAL */
         nav ul {
             display: flex;
             list-style: none;
@@ -116,43 +85,79 @@ nav a:hover {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s;
             padding: 0.5rem 1rem;
             border-radius: 4px;
-            position: relative;
-            overflow: hidden;
-            background-color: transparent; /* Sem fundo */
+            display: block;
+            transition: all 0.3s;
+            background-color: transparent;
         }
 
-        nav a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        nav a:hover::before {
-            left: 100%;
-        }
-
+        /* Quando passar mouse em UM botão, apenas ELE fica azul */
         nav a:hover {
-    color: var(--secondary);
-    transform: translateY(-1px);
-}
+            color: #3498db;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-nav a.active:hover {
-    color: white !important; /* Mantém branco quando ativo e com hover */
-}
+        /* Botão selecionado fica AZUL com letra BRANCA */
+        nav a.active {
+            background-color: #3498db;
+            color: white;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Quando passar mouse no botão selecionado, continua branco */
+        nav a.active:hover {
+            color: white;
+            background-color: #3498db;
+        }
         
         .auth-buttons {
             display: flex;
             gap: 1rem;
         }
 
+        /* CORREÇÃO DOS BOTÕES SUPERIORES - Entrar e Cadastrar */
+        .auth-buttons .btn {
+            padding: 0.6rem 1.8rem;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s ease;
+            min-width: 100px;
+            border: 2px solid;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .auth-buttons .btn-outline {
+            background: transparent;
+            border-color: rgba(255, 255, 255, 0.8);
+            color: white;
+        }
+
+        .auth-buttons .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+        }
+
+        .auth-buttons .btn-primary {
+            background: rgba(52, 152, 219, 0.9);
+            border-color: rgba(52, 152, 219, 0.9);
+            color: white;
+        }
+
+        .auth-buttons .btn-primary:hover {
+            background: rgba(41, 128, 185, 0.95);
+            border-color: rgba(41, 128, 185, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Estilos gerais dos botões (para outras seções) */
         .btn {
             padding: 0.5rem 1.5rem;
             border-radius: 4px;
@@ -645,8 +650,8 @@ nav a.active:hover {
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 10px 20px;
-            background: #3498db;
+            padding: 12px 24px;
+            background: var(--secondary);
             color: white;
             border: none;
             border-radius: 6px;
@@ -890,35 +895,10 @@ nav a.active:hover {
                 align-self: flex-end;
             }
         }
-        /* CORREÇÃO: Forçar estado ativo a ter cores corretas */
-nav ul li a.active {
-    background-color: #3498db !important;
-    color: white !important;
-}
-
-/* Garantir que ao passar mouse no botão ativo, ele permaneça branco */
-nav ul li a.active:hover {
-    color: white !important !important;
-    background-color: #3498db !important;
-}
-
-/* Resetar qualquer estilo de :active (pressionado) errado */
-nav ul li a:active:not(.active) {
-    color: var(--secondary) !important;
-    background-color: transparent !important;
-}
-
-/* Especificidade máxima para corrigir o problema */
-header nav ul li a.active {
-    background-color: #3498db !important;
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3) !important;
-}
     </style>
 </head>
 <body>
-    <!-- Header com botões SEM BORDA -->
+    <!-- Header com botões CORRIGIDOS -->
     <header>
         <div class="container">
             <div class="header-content">
