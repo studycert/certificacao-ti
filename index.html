@@ -1649,9 +1649,10 @@ header nav ul li a.active {
                     
                     const targetId = this.getAttribute('data-target');
                     
-                    // Update active nav link
-                    navLinks.forEach(nav => nav.classList.remove('active'));
-                    this.classList.add('active');
+                    // Update active nav link - APENAS links da navegação principal
+const allNavLinks = document.querySelectorAll('.nav-link');
+allNavLinks.forEach(nav => nav.classList.remove('active'));
+this.classList.add('active');
                     
                     // Show target section
                     mainContents.forEach(content => {
