@@ -74,11 +74,15 @@
             color: var(--secondary);
         }
 
-        /* NAVEGAÇÃO CORRIGIDA */
+                /* NAVEGAÇÃO CORRIGIDA */
         nav ul {
             display: flex;
             list-style: none;
             gap: 1.5rem;
+        }
+
+        nav li {
+            position: relative;
         }
 
         nav a {
@@ -91,6 +95,7 @@
             position: relative;
             overflow: hidden;
             background-color: transparent;
+            display: block;
         }
 
         nav a::before {
@@ -104,11 +109,11 @@
             transition: left 0.5s;
         }
 
+        /* HOVER CORRIGIDO: APENAS o link específico que recebe hover */
         nav a:hover::before {
             left: 100%;
         }
 
-        /* ESTADOS DOS BOTÕES CORRIGIDOS */
         nav a:hover {
             color: var(--secondary);
             transform: translateY(-1px);
@@ -126,63 +131,6 @@
         nav a.active:hover {
             color: white !important;
             background-color: var(--secondary) !important;
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.5rem 1.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
-        }
-
-        .btn-primary {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-
-        .btn-warning {
-            background: var(--warning);
-            color: white;
-        }
-
-        .btn-outline:hover {
-            background: white;
-            color: var(--primary);
-        }
-
-        .btn-primary:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
-        }
-
-        .btn-success:hover {
-            background: #219653;
-        }
-
-        .btn-warning:hover {
-            background: #e67e22;
         }
 
         /* Hero Section */
@@ -869,6 +817,22 @@
             .btn-sm {
                 align-self: flex-end;
             }
+        }
+                /* CORREÇÃO FINAL - GARANTIR QUE NÃO HÁ INTERFERÊNCIA ENTRE LINKS */
+        nav ul li a {
+            isolation: isolate;
+        }
+        
+        /* Remover qualquer efeito de grupo */
+        nav a:hover,
+        nav a.active,
+        nav a.active:hover {
+            isolation: isolate;
+        }
+        
+        /* Resetar completamente o estado de qualquer link que não esteja ativo nem em hover */
+        nav ul li a:not(:hover):not(.active) {
+            color: white !important;
         }
     </style>
 </head>
