@@ -890,6 +890,31 @@ nav a.active:hover {
                 align-self: flex-end;
             }
         }
+        /* CORREÇÃO: Forçar estado ativo a ter cores corretas */
+nav ul li a.active {
+    background-color: #3498db !important;
+    color: white !important;
+}
+
+/* Garantir que ao passar mouse no botão ativo, ele permaneça branco */
+nav ul li a.active:hover {
+    color: white !important !important;
+    background-color: #3498db !important;
+}
+
+/* Resetar qualquer estilo de :active (pressionado) errado */
+nav ul li a:active:not(.active) {
+    color: var(--secondary) !important;
+    background-color: transparent !important;
+}
+
+/* Especificidade máxima para corrigir o problema */
+header nav ul li a.active {
+    background-color: #3498db !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3) !important;
+}
     </style>
 </head>
 <body>
