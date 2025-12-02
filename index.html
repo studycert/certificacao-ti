@@ -158,6 +158,45 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
         }
+        /* ESTILOS ESPECÍFICOS PARA OS BOTÕES DO HEADER */
+.auth-buttons .btn {
+    padding: 0.6rem 1.8rem !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+    min-width: 100px !important;
+}
+
+/* Botão Entrar (Outline) - CORRIGIDO */
+.auth-buttons .btn-outline {
+    background: transparent !important;
+    border: 2px solid white !important;
+    color: white !important;
+}
+
+.auth-buttons .btn-outline:hover {
+    background: white !important;
+    color: var(--primary) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Botão Cadastrar (Primary) - CORRIGIDO */
+.auth-buttons .btn-primary {
+    background: var(--secondary) !important;
+    color: white !important;
+    border: 2px solid var(--secondary) !important;
+}
+
+.auth-buttons .btn-primary:hover {
+    background: #2980b9 !important;
+    border-color: #2980b9 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3) !important;
+}
 
         .btn-success:hover {
             background: #219653;
@@ -873,9 +912,9 @@
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="#" class="btn btn-outline">Entrar</a>
-                    <a href="#" class="btn btn-primary">Cadastrar</a>
-                </div>
+    <a href="#" class="btn btn-outline">Entrar</a>
+    <a href="#" class="btn btn-primary">Cadastrar</a>
+</div>
             </div>
         </div>
     </header>
