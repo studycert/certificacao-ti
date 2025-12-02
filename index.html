@@ -6,6 +6,37 @@
     <title>StudyCert - Sua Plataforma de Certificação em TI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+ /* Botão ativo na navegação - Estilo igual ao botão Cadastrar */
+nav a.active {
+    background-color: #3498db !important; /* Azul esverdeado */
+    color: white !important; /* Fonte branca */
+    border: none !important; /* Sem borda */
+    box-shadow: 0 4px 8px rgba(26, 188, 156, 0.3); /* Sombra azul esverdeada */
+    backdrop-filter: none; /* Remove o blur */
+    animation: pulseActive 0.3s ease;
+}
+
+@keyframes pulseActive {
+    0% {
+        background-color: transparent;
+    }
+    100% {
+        background-color: rgba(52, 152, 219, 0.2);
+    }
+}
+
+/* Efeito adicional para o botão ativo - remove qualquer borda residual */
+nav a {
+    border: none !important;
+    outline: none !important;
+}
+
+/* Garantir que o hover também funcione corretamente */
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none !important;
+}
+
         * {
             margin: 0;
             padding: 0;
@@ -37,7 +68,7 @@
             padding: 0 20px;
         }
 
-        /* Header */
+        /* Header - BOTÕES SEM BORDA */
         header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
             color: white;
@@ -74,7 +105,7 @@
             color: var(--secondary);
         }
 
-        /* NAVEGAÇÃO */
+        /* NAVEGAÇÃO - BOTÕES SEM BORDA */
         nav ul {
             display: flex;
             list-style: none;
@@ -85,74 +116,43 @@
             color: white;
             text-decoration: none;
             font-weight: 500;
+            transition: all 0.3s;
             padding: 0.5rem 1rem;
             border-radius: 4px;
-            display: block;
-            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            background-color: transparent; /* Sem fundo */
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        nav a:hover::before {
+            left: 100%;
         }
 
         nav a:hover {
-            color: #3498db;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
+    color: var(--secondary);
+    transform: translateY(-1px);
+}
 
-        nav a.active {
-            background-color: #3498db;
-            color: white;
-            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
-        }
-
-        nav a.active:hover {
-            color: white;
-            background-color: #3498db;
-        }
+nav a.active:hover {
+    color: white !important; /* Mantém branco quando ativo e com hover */
+}
         
         .auth-buttons {
             display: flex;
             gap: 1rem;
         }
 
-        /* BOTÕES DO HEADER - CORRIGIDOS */
-        .auth-buttons .btn {
-            padding: 0.6rem 1.8rem;
-            font-weight: 600;
-            border-radius: 6px;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            transition: all 0.3s ease;
-            min-width: 100px;
-            border: 2px solid;
-            cursor: pointer;
-        }
-
-        .auth-buttons .btn-outline {
-            background: transparent;
-            border-color: rgba(255, 255, 255, 0.8);
-            color: white;
-        }
-
-        .auth-buttons .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
-        }
-
-        .auth-buttons .btn-primary {
-            background: rgba(52, 152, 219, 0.9);
-            border-color: rgba(52, 152, 219, 0.9);
-            color: white;
-        }
-
-        .auth-buttons .btn-primary:hover {
-            background: rgba(41, 128, 185, 0.95);
-            border-color: rgba(41, 128, 185, 0.95);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        /* Estilos gerais dos botões */
         .btn {
             padding: 0.5rem 1.5rem;
             border-radius: 4px;
@@ -645,8 +645,8 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 12px 24px;
-            background: var(--secondary);
+            padding: 10px 20px;
+            background: #3498db;
             color: white;
             border: none;
             border-radius: 6px;
@@ -890,10 +890,35 @@
                 align-self: flex-end;
             }
         }
+        /* CORREÇÃO: Forçar estado ativo a ter cores corretas */
+nav ul li a.active {
+    background-color: #3498db !important;
+    color: white !important;
+}
+
+/* Garantir que ao passar mouse no botão ativo, ele permaneça branco */
+nav ul li a.active:hover {
+    color: white !important !important;
+    background-color: #3498db !important;
+}
+
+/* Resetar qualquer estilo de :active (pressionado) errado */
+nav ul li a:active:not(.active) {
+    color: var(--secondary) !important;
+    background-color: transparent !important;
+}
+
+/* Especificidade máxima para corrigir o problema */
+header nav ul li a.active {
+    background-color: #3498db !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3) !important;
+}
     </style>
 </head>
 <body>
-    <!-- Header com botões CORRIGIDOS -->
+    <!-- Header com botões SEM BORDA -->
     <header>
         <div class="container">
             <div class="header-content">
@@ -1372,8 +1397,8 @@
                         <span class="simulado-badge">11 Simulados Disponíveis</span>
                         <p>Pacote completo de simulados para certificação ITIL 4 Foundation.</p>
                         
-                        <!-- Botão para mostrar simulados - CORRIGIDO -->
-                        <button class="show-simulados-btn" id="abrirModalBtn">
+                        <!-- Botão para mostrar simulados -->
+                        <button class="show-simulados-btn" onclick="abrirModalSimulados()">
                             <i class="fas fa-list"></i> Ver 11 Simulados
                         </button>
                     </div>
@@ -1443,12 +1468,12 @@
         </div>
     </section>
 
-    <!-- Modal da Lista de Simulados - CORRIGIDA -->
+    <!-- Modal da Lista de Simulados -->
     <div id="modalSimulados" class="modal-simulados">
         <div class="modal-container">
             <div class="modal-header">
                 <h3><i class="fas fa-file-alt"></i> Simulados ITIL 4 Foundation</h3>
-                <button class="fechar-modal" id="fecharModalBtn">&times;</button>
+                <button class="fechar-modal" onclick="fecharModalSimulados()">&times;</button>
             </div>
             
             <div class="modal-body">
@@ -1613,27 +1638,22 @@
     </footer>
 
     <script>
+        // Navigation between sections
         document.addEventListener('DOMContentLoaded', function() {
-            // Navigation SIMPLES
-            const navLinks = document.querySelectorAll('.nav-link');
+            const navLinks = document.querySelectorAll('.nav-link, .footer-links a[data-target], .btn[data-target]');
             const mainContents = document.querySelectorAll('.main-content');
             
-            // Quando clicar em um link
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     
                     const targetId = this.getAttribute('data-target');
                     
-                    // REMOVE ativo de TODOS os links
-                    navLinks.forEach(nav => {
-                        nav.classList.remove('active');
-                    });
-                    
-                    // ADICIONA ativo apenas no clicado
+                    // Update active nav link
+                    navLinks.forEach(nav => nav.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // Mostra a seção correta
+                    // Show target section
                     mainContents.forEach(content => {
                         content.classList.remove('active');
                         if (content.id === targetId) {
@@ -1641,104 +1661,12 @@
                         }
                     });
                     
-                    // Scroll para o topo
+                    // Scroll to top
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             });
             
-            // Links do footer (não mudam a navegação)
-            const footerLinks = document.querySelectorAll('.footer-links a[data-target]');
-            footerLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('data-target');
-                    
-                    // Ativa a seção
-                    mainContents.forEach(content => {
-                        content.classList.remove('active');
-                        if (content.id === targetId) {
-                            content.classList.add('active');
-                        }
-                    });
-                    
-                    // Ativa o link correto na barra superior
-                    navLinks.forEach(nav => {
-                        nav.classList.remove('active');
-                        if (nav.getAttribute('data-target') === targetId) {
-                            nav.classList.add('active');
-                        }
-                    });
-                    
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            });
-            
-            // Botões com data-target
-            const btnLinks = document.querySelectorAll('.btn[data-target]');
-            btnLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('data-target');
-                    
-                    mainContents.forEach(content => {
-                        content.classList.remove('active');
-                        if (content.id === targetId) {
-                            content.classList.add('active');
-                        }
-                    });
-                    
-                    navLinks.forEach(nav => {
-                        nav.classList.remove('active');
-                        if (nav.getAttribute('data-target') === targetId) {
-                            nav.classList.add('active');
-                        }
-                    });
-                    
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            });
-
-            // FUNÇÕES DA MODAL - CORRIGIDAS
-            const modal = document.getElementById('modalSimulados');
-            const abrirModalBtn = document.getElementById('abrirModalBtn');
-            const fecharModalBtn = document.getElementById('fecharModalBtn');
-            
-            function abrirModalSimulados() {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function fecharModalSimulados() {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-
-            // Event listeners CORRETOS
-            if (abrirModalBtn) {
-                abrirModalBtn.addEventListener('click', abrirModalSimulados);
-            }
-            
-            if (fecharModalBtn) {
-                fecharModalBtn.addEventListener('click', fecharModalSimulados);
-            }
-
-            // Fechar modal ao clicar fora
-            if (modal) {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        fecharModalSimulados();
-                    }
-                });
-            }
-
-            // Fechar modal com ESC
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modal.classList.contains('active')) {
-                    fecharModalSimulados();
-                }
-            });
-            
-            // Upload
+            // Simulate file upload for simulados
             const uploadBtn = document.querySelector('.upload-area .btn');
             if (uploadBtn) {
                 uploadBtn.addEventListener('click', function(e) {
@@ -1746,21 +1674,32 @@
                     alert('Funcionalidade de upload será implementada em breve!');
                 });
             }
-            
-            // Teste dos botões do header
-            const entrarBtn = document.querySelector('.auth-buttons .btn-outline');
-            const cadastrarBtn = document.querySelector('.auth-buttons .btn-primary');
-            
-            if (entrarBtn) {
-                entrarBtn.addEventListener('mouseenter', function() {
-                    console.log('Efeito hover ativado no botão Entrar');
-                });
+        });
+
+        // Funções para abrir/fechar a modal de simulados
+        function abrirModalSimulados() {
+            const modal = document.getElementById('modalSimulados');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharModalSimulados() {
+            const modal = document.getElementById('modalSimulados');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fechar modal ao clicar fora do container
+        document.getElementById('modalSimulados').addEventListener('click', function(e) {
+            if (e.target === this) {
+                fecharModalSimulados();
             }
-            
-            if (cadastrarBtn) {
-                cadastrarBtn.addEventListener('mouseenter', function() {
-                    console.log('Efeito hover ativado no botão Cadastrar');
-                });
+        });
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                fecharModalSimulados();
             }
         });
     </script>
